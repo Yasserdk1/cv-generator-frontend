@@ -1,0 +1,555 @@
+/* ==================== MAIN CONTAINER ==================== */
+.cv-form-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+/* ==================== HEADER ==================== */
+.form-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.form-header h1 {
+  font-size: 38px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.form-header h1 i {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ==================== FORM SECTIONS ==================== */
+.form-section {
+  background: white;
+  padding: 35px;
+  margin-bottom: 30px;
+  border-radius: 16px;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.06);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.3s ease;
+}
+
+.form-section:hover {
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f2ff;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #1a1a2e;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-header h2 i {
+  color: #667eea;
+  font-size: 22px;
+}
+
+.section-description {
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+.section-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==================== GRID LAYOUT ==================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ==================== FORM CONTROLS ==================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 2px solid #e8eaf6;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fafbff;
+  color: #1a1a2e;
+}
+
+.form-control:hover {
+  border-color: #c5cae9;
+  background: white;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  background: white;
+}
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+select.form-control {
+  cursor: pointer;
+}
+
+.form-hint {
+  font-size: 13px;
+  color: #999;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+}
+
+/* ==================== INPUT WITH ICON ==================== */
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #667eea;
+  pointer-events: none;
+}
+
+.input-with-icon .form-control {
+  padding-left: 42px;
+}
+
+/* ==================== ARRAY ITEMS ==================== */
+.array-container {
+  margin-top: 20px;
+}
+
+.array-item {
+  background: linear-gradient(135deg, #fafbff 0%, #f5f7ff 100%);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 2px solid #e8eaf6;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.array-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.array-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.item-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-title h4 {
+  margin: 0;
+  color: #1a1a2e;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.item-number {
+  font-size: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #fafbff 0%, #f5f7ff 100%);
+  border-radius: 12px;
+  border: 2px dashed #c5cae9;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: #c5cae9;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  margin: 0 0 10px 0;
+  color: #1a1a2e;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  margin: 0 0 25px 0;
+  color: #888;
+  font-size: 14px;
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  padding: 11px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.3px;
+}
+
+.btn i {
+  font-size: 14px;
+}
+
+.btn-add {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.btn-outline {
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+}
+
+.btn-outline:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  padding: 14px 32px;
+  font-size: 16px;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(79, 172, 254, 0.5);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #a8b9c9 0%, #7f8c8d 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(127, 140, 141, 0.3);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(127, 140, 141, 0.4);
+}
+
+.btn-submit {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-submit:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* ==================== FORM ACTIONS ==================== */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.06);
+}
+
+.actions-left,
+.actions-right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* ==================== FORM INFO ==================== */
+.form-info {
+  margin-top: 30px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.info-item {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-item i {
+  color: #667eea;
+  font-size: 16px;
+  width: 20px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .cv-form-container {
+    padding: 20px 10px;
+  }
+
+  .form-header {
+    padding: 30px 20px;
+  }
+
+  .form-header h1 {
+    font-size: 28px;
+  }
+
+  .form-section {
+    padding: 25px 20px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .array-item {
+    padding: 20px;
+  }
+
+  .item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .actions-left,
+  .actions-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-success {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-section {
+  animation: fadeIn 0.5s ease;
+}
+
+.array-item {
+  animation: fadeIn 0.4s ease;
+}
+
+/* ==================== FOCUS VISIBLE ==================== */
+.btn:focus-visible,
+.form-control:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+  .cv-form-container {
+    background: white;
+  }
+
+  .form-section {
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  .btn {
+    display: none;
+  }
+
+  .form-actions {
+    display: none;
+  }
+}

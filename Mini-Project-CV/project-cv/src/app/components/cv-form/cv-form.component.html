@@ -1,0 +1,330 @@
+<div class="cv-form-container">
+  <!-- ========== EN-TÊTE DU FORMULAIRE ========== -->
+  <div class="form-header">
+    <h1><i class="fas fa-file-alt"></i> Créer un CV Professionnel</h1>
+    <p class="header-subtitle">Remplissez les informations ci-dessous pour générer votre CV</p>
+  </div>
+
+  <!-- ========== FORMULAIRE PRINCIPAL ========== -->
+  <form [formGroup]="cvForm" (ngSubmit)="submit()" class="cv-form">
+
+    <!-- ===== VOS INFORMATIONS ===== -->
+    <section class="form-section">
+      <div class="section-header">
+        <h2><i class="fas fa-user-tie"></i> Vos informations</h2>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+      <div class="section-content form-grid">
+        <app-user-info [parentForm]="cvForm"></app-user-info>
+      </div>
+    </section>
+
+    <!-- ===== INFORMATIONS PERSONNELLES ===== -->
+    <section class="form-section">
+      <div class="section-header">
+        <h2><i class="fas fa-id-card"></i> Informations personnelles</h2>
+        <span class="section-badge">Obligatoire</span>
+      </div>
+      <div class="section-content form-grid">
+        <app-personal-info [parentForm]="cvForm"></app-personal-info>
+      </div>
+    </section>
+
+    <!-- ===== FORMATIONS ===== -->
+    <section class="form-section">
+      <div class="section-header">
+        <div>
+          <h2><i class="fas fa-graduation-cap"></i> Formations</h2>
+          <p class="section-description">Ajoutez vos diplômes et formations académiques</p>
+        </div>
+        <button type="button" class="btn btn-add" (click)="addFormation()">
+          <i class="fas fa-plus-circle"></i> Ajouter une formation
+        </button>
+      </div>
+
+      <div formArrayName="formations" class="array-container">
+        <div class="empty-state" *ngIf="formations.controls.length === 0">
+          <i class="fas fa-graduation-cap empty-icon"></i>
+          <h3>Aucune formation ajoutée</h3>
+          <p>Commencez par ajouter votre formation la plus récente</p>
+          <button type="button" class="btn btn-outline" (click)="addFormation()">
+            <i class="fas fa-plus"></i> Ajouter ma première formation
+          </button>
+        </div>
+
+        <div *ngFor="let f of formations.controls; let i = index" [formGroupName]="i" class="array-item">
+          <!-- Entête formation -->
+          <div class="item-header">
+            <div class="item-title">
+              <span class="item-number">Formation #{{ i + 1 }}</span>
+              <h4>{{ f.get('diplome')?.value || 'Nouvelle formation' }}</h4>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" (click)="formations.removeAt(i)" title="Supprimer">
+              <i class="fas fa-trash-alt"></i> Supprimer
+            </button>
+          </div>
+
+          <!-- Contenu formation -->
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="diplome-{{i}}">Diplôme obtenu *</label>
+              <input id="diplome-{{i}}" formControlName="diplome" placeholder="Ex: Master en Informatique" class="form-control">
+              <div class="form-hint">Nom complet du diplôme</div>
+            </div>
+
+            <div class="form-group">
+              <label for="etablissement-{{i}}">Établissement *</label>
+              <input id="etablissement-{{i}}" formControlName="etablissement" placeholder="Ex: Université Paris-Saclay" class="form-control">
+              <div class="form-hint">Nom de l'école ou université</div>
+            </div>
+
+            <div class="form-group">
+              <label for="dateDebut-{{i}}">Date de début</label>
+              <div class="input-with-icon">
+                <i class="far fa-calendar"></i>
+                <input id="dateDebut-{{i}}" formControlName="dateDebut" type="date" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dateFin-{{i}}">Date de fin</label>
+              <div class="input-with-icon">
+                <i class="far fa-calendar"></i>
+                <input id="dateFin-{{i}}" formControlName="dateFin" type="date" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="description-{{i}}">Description</label>
+              <textarea id="description-{{i}}" formControlName="description" placeholder="Décrivez votre formation..." rows="3" class="form-control"></textarea>
+              <div class="form-footer">
+                <div class="char-count">{{ f.get('description')?.value?.length || 0 }}/500 caractères</div>
+                <div class="form-hint">Décrivez vos réalisations et compétences acquises</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPÉRIENCES PROFESSIONNELLES ===== -->
+    <section class="form-section">
+      <div class="section-header">
+        <div>
+          <h2><i class="fas fa-briefcase"></i> Expériences professionnelles</h2>
+          <p class="section-description">Listez vos expériences par ordre chronologique</p>
+        </div>
+        <button type="button" class="btn btn-add" (click)="addExperience()">
+          <i class="fas fa-plus-circle"></i> Ajouter une expérience
+        </button>
+      </div>
+
+      <div formArrayName="experiences" class="array-container">
+        <div class="empty-state" *ngIf="experiences.controls.length === 0">
+          <i class="fas fa-briefcase empty-icon"></i>
+          <h3>Aucune expérience ajoutée</h3>
+          <p>Ajoutez vos postes précédents pour montrer votre parcours professionnel</p>
+          <button type="button" class="btn btn-outline" (click)="addExperience()">
+            <i class="fas fa-plus"></i> Ajouter ma première expérience
+          </button>
+        </div>
+
+        <div *ngFor="let e of experiences.controls; let i = index" [formGroupName]="i" class="array-item">
+          <div class="item-header">
+            <div class="item-title">
+              <span class="item-number">Expérience #{{ i + 1 }}</span>
+              <h4>{{ e.get('poste')?.value || 'Nouvelle expérience' }}</h4>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" (click)="experiences.removeAt(i)" title="Supprimer">
+              <i class="fas fa-trash-alt"></i> Supprimer
+            </button>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="poste-{{i}}">Poste occupé *</label>
+              <input id="poste-{{i}}" formControlName="poste" placeholder="Ex: Développeur Full Stack" class="form-control">
+              <div class="form-hint">Intitulé exact du poste</div>
+            </div>
+
+            <div class="form-group">
+              <label for="entreprise-{{i}}">Entreprise *</label>
+              <input id="entreprise-{{i}}" formControlName="entreprise" placeholder="Ex: Google France" class="form-control">
+              <div class="form-hint">Nom de l'entreprise</div>
+            </div>
+
+            <div class="form-group">
+              <label for="expDateDebut-{{i}}">Date de début</label>
+              <div class="input-with-icon">
+                <i class="far fa-calendar"></i>
+                <input id="expDateDebut-{{i}}" formControlName="dateDebut" type="date" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="expDateFin-{{i}}">Date de fin</label>
+              <div class="input-with-icon">
+                <i class="far fa-calendar"></i>
+                <input id="expDateFin-{{i}}" formControlName="dateFin" type="date" class="form-control">
+              </div>
+              <div class="form-hint">Laissez vide si poste actuel</div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="missions-{{i}}">Missions et responsabilités</label>
+              <textarea id="missions-{{i}}" formControlName="missions" placeholder="Décrivez vos missions..." rows="4" class="form-control"></textarea>
+              <div class="form-footer">
+                <div class="char-count">{{ e.get('missions')?.value?.length || 0 }}/1000 caractères</div>
+                <div class="form-hint">Utilisez des puces pour décrire vos réalisations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPÉTENCES ===== -->
+    <section class="form-section">
+      <div class="section-header">
+        <div>
+          <h2><i class="fas fa-tools"></i> Compétences</h2>
+          <p class="section-description">Listez vos compétences techniques et professionnelles</p>
+        </div>
+        <button type="button" class="btn btn-add" (click)="addCompetence()">
+          <i class="fas fa-plus-circle"></i> Ajouter une compétence
+        </button>
+      </div>
+
+      <div formArrayName="competences" class="array-container">
+        <div class="empty-state" *ngIf="competences.controls.length === 0">
+          <i class="fas fa-tools empty-icon"></i>
+          <h3>Aucune compétence ajoutée</h3>
+          <p>Ajoutez vos compétences techniques, linguistiques et professionnelles</p>
+          <button type="button" class="btn btn-outline" (click)="addCompetence()">
+            <i class="fas fa-plus"></i> Ajouter ma première compétence
+          </button>
+        </div>
+
+        <div *ngFor="let c of competences.controls; let i = index" [formGroupName]="i" class="array-item skill-item">
+          <div class="item-header">
+            <div class="item-title">
+              <span class="item-number">Compétence #{{ i + 1 }}</span>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" (click)="competences.removeAt(i)" title="Supprimer">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="competenceNom-{{i}}">Compétence *</label>
+              <input id="competenceNom-{{i}}" formControlName="nom" placeholder="Ex: JavaScript, React" class="form-control">
+              <div class="form-hint">Nom de la compétence</div>
+            </div>
+
+            <div class="form-group">
+              <label for="competenceNiveau-{{i}}">Niveau de maîtrise</label>
+              <select id="competenceNiveau-{{i}}" formControlName="niveau" class="form-control">
+                <option value="">Sélectionnez un niveau</option>
+                <option value="Débutant">Débutant</option>
+                <option value="Intermédiaire">Intermédiaire</option>
+                <option value="Avancé">Avancé</option>
+                <option value="Expert">Expert</option>
+              </select>
+              <div class="form-hint">Votre niveau de maîtrise</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LANGUES ===== -->
+    <section class="form-section">
+      <div class="section-header">
+        <div>
+          <h2><i class="fas fa-globe-europe"></i> Langues</h2>
+          <p class="section-description">Indiquez les langues que vous maîtrisez</p>
+        </div>
+        <button type="button" class="btn btn-add" (click)="addLangue()">
+          <i class="fas fa-plus-circle"></i> Ajouter une langue
+        </button>
+      </div>
+
+      <div formArrayName="langues" class="array-container">
+        <div class="empty-state" *ngIf="langues.controls.length === 0">
+          <i class="fas fa-globe-europe empty-icon"></i>
+          <h3>Aucune langue ajoutée</h3>
+          <p>Ajoutez les langues que vous parlez, lisez et écrivez</p>
+          <button type="button" class="btn btn-outline" (click)="addLangue()">
+            <i class="fas fa-plus"></i> Ajouter ma première langue
+          </button>
+        </div>
+
+        <div *ngFor="let l of langues.controls; let i = index" [formGroupName]="i" class="array-item language-item">
+          <div class="item-header">
+            <div class="item-title">
+              <span class="item-number">Langue #{{ i + 1 }}</span>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" (click)="langues.removeAt(i)" title="Supprimer">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="langueNom-{{i}}">Langue *</label>
+              <input id="langueNom-{{i}}" formControlName="nom" placeholder="Ex: Anglais, Espagnol" class="form-control">
+              <div class="form-hint">Nom de la langue</div>
+            </div>
+
+            <div class="form-group">
+              <label for="langueNiveau-{{i}}">Niveau</label>
+              <select id="langueNiveau-{{i}}" formControlName="niveau" class="form-control">
+                <option value="">Sélectionnez un niveau</option>
+                <option value="A1">A1 - Débutant</option>
+                <option value="A2">A2 - Élémentaire</option>
+                <option value="B1">B1 - Intermédiaire</option>
+                <option value="B2">B2 - Intermédiaire supérieur</option>
+                <option value="C1">C1 - Avancé</option>
+                <option value="C2">C2 - Maîtrise</option>
+                <option value="Langue maternelle">Langue maternelle</option>
+              </select>
+              <div class="form-hint">Cadre européen commun de référence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ACTIONS DU FORMULAIRE ===== -->
+    <div class="form-actions">
+      <div class="actions-left">
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">
+          <i class="fas fa-redo"></i> Tout effacer
+        </button>
+      </div>
+      <div class="actions-right">
+        <button type="submit" class="btn btn-success btn-submit">
+          <i class="fas fa-file-export"></i> Générer mon CV
+        </button>
+      </div>
+      <button type="button" class="btn btn-outline" (click)="prepareCV()">
+      <i class="fas fa-file-pdf"></i> Exporter en PDF
+</button>
+
+    </div>
+
+    <!-- ===== INFORMATIONS UTILES ===== -->
+    <div class="form-info">
+      <div class="info-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Tous les champs marqués d'un * sont obligatoires</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-shield-alt"></i>
+        <span>Vos données sont sécurisées et ne seront pas partagées</span>
+      </div>
+    </div>
+
+  </form>
+</div>

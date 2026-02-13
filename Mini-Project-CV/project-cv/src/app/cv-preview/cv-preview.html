@@ -1,0 +1,88 @@
+<div id="cv-pdf" #cvPdf *ngIf="cv" class="cv-container">
+
+  <!-- HEADER -->
+  <div class="cv-header">
+    <div class="photo-container" *ngIf="cv.photo">
+      <img [src]="cv.photo" alt="Photo">
+    </div>
+
+    <div class="header-info">
+      <h1>{{ cv.user?.prenom }} {{ cv.user?.nom }}</h1>
+
+      <div class="contact-info">
+        <span><i class="fas fa-envelope"></i> {{ cv.user?.email }}</span>
+        <span><i class="fas fa-map-marker-alt"></i> {{ cv.adresse }}</span>
+        <span><i class="fas fa-birthday-cake"></i> {{ cv.dateNaissance }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMATIONS -->
+  <div class="cv-section" *ngIf="cv.formations?.length">
+    <h2><i class="fas fa-graduation-cap"></i> Formations</h2>
+
+    <div class="cv-item" *ngFor="let f of cv.formations">
+      <div class="item-header">
+        <strong>{{ f.diplome }}</strong>
+        <span class="date">{{ f.dateDebut }} - {{ f.dateFin }}</span>
+      </div>
+
+      <div class="item-sub">{{ f.etablissement }}</div>
+
+      <p>{{ f.description }}</p>
+    </div>
+  </div>
+
+  <!-- EXPERIENCES -->
+  <div class="cv-section" *ngIf="cv.experiences?.length">
+    <h2><i class="fas fa-briefcase"></i> Expériences</h2>
+
+    <div class="cv-item" *ngFor="let e of cv.experiences">
+      <div class="item-header">
+        <strong>{{ e.poste }}</strong>
+        <span class="date">{{ e.dateDebut }} - {{ e.dateFin }}</span>
+      </div>
+
+      <div class="item-sub">{{ e.entreprise }}</div>
+
+      <p>{{ e.missions }}</p>
+    </div>
+  </div>
+
+  <!-- COMPETENCES -->
+  <div class="cv-section" *ngIf="cv.competences?.length">
+    <h2><i class="fas fa-cogs"></i> Compétences</h2>
+
+    <ul class="skill-list">
+      <li *ngFor="let c of cv.competences">
+        {{ c.nom }}
+        <span *ngIf="c.niveau" class="skill-level">
+          {{ c.niveau }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- LANGUES -->
+  <div class="cv-section" *ngIf="cv.langues?.length">
+    <h2><i class="fas fa-language"></i> Langues</h2>
+
+    <ul class="skill-list">
+      <li *ngFor="let l of cv.langues">
+        {{ l.nom }}
+        <span *ngIf="l.niveau" class="skill-level">
+          {{ l.niveau }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- DOWNLOAD BUTTON - At Bottom -->
+  <div class="download-container">
+    <button class="download-btn" (click)="downloadPDF()">
+      <i class="fas fa-download"></i>
+      Télécharger le PDF
+    </button>
+  </div>
+
+</div>
